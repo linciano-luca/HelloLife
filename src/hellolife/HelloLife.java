@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -91,20 +92,29 @@ public class HelloLife extends Application {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setPannable(true);
-        scrollPane.setContent(textRef);        
+        scrollPane.setContent(textRef);      
         
+        // Add a button to scroll down
         
-        // Combine ImageView and Group
+        Button myButton = new Button("Scroll down");
+        myButton.setLayoutX(50);
+        myButton.setLayoutY(300);
+        
+        myButton.setOnAction(e->{
+            // Start the text animation
+            transTransition.play();
+        });
+        
+        // Combine ImageView and scrollPane
         // The dimensions of the scene are the same of the image
-        Group root = new Group(iv, scrollPane);
+        Group root = new Group(iv, scrollPane, myButton);
         Scene scene = new Scene(root, 900, 600);
 
         stage.setScene(scene);
         stage.setTitle("Привет, жизнь!");
         stage.show();
 
-        // Start the text animation
-        transTransition.play();
+        
     }
 
     /**
